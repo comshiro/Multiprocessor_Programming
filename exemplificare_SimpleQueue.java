@@ -1,6 +1,6 @@
 package org.example;
 
-public class Main {
+public class exemplificare_SimpleQueue {
     public static void main(String[] args) throws InterruptedException {
         SimpleQueue<Integer> queue = new SimpleQueue<>(2);
 
@@ -34,11 +34,10 @@ public class Main {
             }
         });
 
-        // Pornește producătorii înaintea consumatorilor
+        //Producatorii pornesc înaintea consumatorilor
         producer1.start();
         producer2.start();
 
-        // Consumatorii pornesc după 1.5 secunde
         consumer1.start();
         consumer2.start();
 

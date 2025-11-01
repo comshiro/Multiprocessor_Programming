@@ -19,17 +19,19 @@ class SimpleQueue<T>{
     public void enq(T x) {
         lock.lock();
         try {
-            while(count == items.length)
+            while(count == items.length) //verifică dacă coada este plină
             {
-                try { full.await(); }
+                try { full.await(); } //eliberează lock-ul atomically și pune firul curent în
+                // așteptare pe condiția full;  când firul este trezit (prin signal()/signalAll() de
+                // pe aceeași Condition), el re-achiziționează lock-ul înainte de a reveni din await().
                 catch (InterruptedException e) { }
                 finally { }
             }
             System.out.println("Enqueuing " + x);
             items[tail] = x;
-            if (++tail == items.length) { tail = 0; }
+            if (++tail == items.length) { tail = 0; } //verificăm dacă am depășit capătul array-ului
             count++;
-            if (count == 1) {
+            if (count == 1) { //Semnalăm condiția empty numai în momentul în care coada a devenit nevidă
                 empty.signal();
             }
         } finally {
