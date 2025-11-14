@@ -25,13 +25,13 @@ public class exemplificare_LockBasedQueue {
         // Thread care introduce elemente
         Thread producer1 = new Thread(() -> {
             System.out.println("Producer 1 încearcă să introducă elemente...");
-            for (int i = 0; i < 15; i++) {  // 15 > QSIZE pentru a evidenția așteptarea
+            for (int i = 0; i < 15; i++) {
                 queue.enq(i);
                 System.out.println("Producer 1 a introdus: " + i);
             }
         }, "Producer-1");
 
-        // Alt producer pentru a evidenția concurența
+        // Alt producer
         Thread producer2 = new Thread(() -> {
             System.out.println("Producer 2 încearcă să introducă elemente...");
             for (int i = 100; i < 110; i++) {
